@@ -1,0 +1,122 @@
+
+<html>
+<head>
+    <title>My API _ Experience</title>
+
+
+<style>
+    .wrapper{
+        background-color: indianred;
+        width: 50%;
+        height:50%;
+        margin-left:23%;
+    }
+    #form{
+        display: flex;
+        flex-direction: column;
+        width: 42%;
+      margin-left:28%;
+    }
+    h2{
+        padding: 10px;
+        color: white;
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">   
+
+  <center>  <h2>Fetch API</h2></center>
+    
+<form id="form" method="post">
+
+<input type="text" id="name" placeholder="Name" />
+<input type="text" id="body" placeholder="Body" />
+
+<input type="submit" value="Publish / Post">
+
+</form>
+<div id="results">
+
+</div>
+
+</div>
+
+</body>
+
+
+<script>
+
+let form = document.getElementById('form')
+
+form.addEventListener('submit',function(e)
+
+{
+    //auto submission of the form restriction
+e.preventDefault()
+
+let name= document.getElementById('name').value
+let body= document.getElementById('body').value
+
+
+   //fetch post request
+
+   fetch("https://jsonplaceholder.typicode.com/posts",{
+
+   method: 'POST',
+   body:JSON.stringify({
+
+Title:name,
+body:body,
+
+
+
+   }),
+   headers:{
+    "Content-Type":"application/json; charset=UTF-8"
+   }
+
+   })
+
+
+   .then(function(response){
+  
+    return  response.json()
+
+   })
+
+   .then (function(data){
+    console.log(data)
+   
+    let results = document.getElementById('results')
+
+    results.innerHTML = `<h3>The TITLE OF THE BOOK IS: ${data.Title}</h3>
+                         <p>The Description of the BOOK is: ${data.body}</p>
+                         <center><p>&copy MUGISHA yves Fetch API Task</p></center>`
+    
+
+   })
+
+
+
+
+ 
+})
+
+
+
+
+
+</script>
+
+
+
+</html>
+
+
+
+
+
